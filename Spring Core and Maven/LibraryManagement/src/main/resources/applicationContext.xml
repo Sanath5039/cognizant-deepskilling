@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- Exercise 6: Enable component scanning so @Service, @Repository and
+         @Aspect/@Component annotated classes are auto-registered as beans -->
+    <context:component-scan base-package="com.library" />
+    <context:annotation-config />
+
+    <!-- Exercise 3 & 8: Enable AspectJ auto-proxying so LoggingAspect's
+         advice is woven around the scanned beans -->
+    <aop:aspectj-autoproxy />
+
+    <!--
+        Exercises 1, 2, 5 & 7: Equivalent PLAIN XML bean wiring, shown here
+        for reference. If you remove the @Service/@Repository annotations
+        above and disable component-scan, this XML block wires the same
+        beans by hand, demonstrating constructor injection (Exercise 7)
+        and setter injection (Exercise 2 & 5).
+
+    <bean id="bookRepository" class="com.library.repository.BookRepository" />
+
+    <bean id="bookService" class="com.library.service.BookService">
+        <constructor-arg ref="bookRepository" />
+        <property name="bookRepository" ref="bookRepository" />
+    </bean>
+    -->
+
+</beans>
